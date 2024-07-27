@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -49,13 +49,25 @@ namespace CodeChallenge.Core
                 }
                 else if (ch == '*')
                 {
-                    if (output.Length > 0)
+                    if (lastChar != '\0' && count > 0)
+                    {
+                        lastChar = '\0';
+                        count--;
+                    }
+
+                    else if (output.Length > 0)
                     {
                         output.Length--;
                     }
                 }
                 else if (ch == ' ')
                 {
+                    if (lastChar != '\0')
+                    {
+                        output.Append(GetCharacter(lastChar, count));
+                        count = 0;
+                    }
+
                     lastChar = '\0';
                 }
                 else
